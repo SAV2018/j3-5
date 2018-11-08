@@ -23,6 +23,7 @@ public class Car implements Runnable {
 
     @Override
     public void run() {
+        // подготовка участника
         try {
             System.out.println(this.name + " готовится");
             Thread.sleep(500 + (int)(Math.random() * 800));
@@ -32,12 +33,14 @@ public class Car implements Runnable {
             e.printStackTrace();
         }
 
+        // участник готов
         try {
             Main.start.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+        // проходим все этапы
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
         }
