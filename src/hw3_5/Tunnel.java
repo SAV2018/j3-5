@@ -13,14 +13,14 @@ public class Tunnel extends Stage {
         try {
             try {
                 System.out.println(c.getName() + " готовится к этапу (ждёт): " + description);
-                Main.semaphore.acquire();
+                Main.tunnelLimit.acquire();
                 System.out.println(c.getName() + " начал этап: " + description);
                 Thread.sleep(length / c.getSpeed() * 1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
                 System.out.println(c.getName() + " закончил этап: " + description);
-                Main.semaphore.release();
+                Main.tunnelLimit.release();
             }
         } catch (Exception e) {
             e.printStackTrace();
